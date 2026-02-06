@@ -17,6 +17,7 @@ body {
   background: url("us.jpeg") no-repeat center center fixed;
   background-size: cover;
   font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
 
 .container {
@@ -54,7 +55,7 @@ button {
   border-radius: 30px;
   cursor: pointer;
   margin: 10px;
-  z-index: 5;
+  z-index: 10;
 }
 
 #yesBtn {
@@ -68,13 +69,14 @@ button {
   position: absolute;
 }
 
-/* Bottom second screen content */
+/* Bottom content */
 .second-content {
   position: absolute;
   left: 0;
   right: 0;
   bottom: 40px;
   display: none;
+  z-index: 5;
 }
 
 .love {
@@ -83,7 +85,6 @@ button {
   color: #fff;
   margin-bottom: 10px;
   text-shadow: 0 2px 10px rgba(0,0,0,0.7);
-  animation: pop 1.3s ease forwards;
 }
 
 .message {
@@ -91,7 +92,6 @@ button {
   color: #fff;
   line-height: 1.4;
   text-shadow: 0 2px 10px rgba(0,0,0,0.7);
-  animation: fade 2s ease forwards;
 }
 
 .heart {
@@ -103,17 +103,6 @@ button {
   pointer-events: none;
 }
 
-@keyframes pop {
-  0% { transform: scale(0); opacity: 0; }
-  70% { transform: scale(1.2); opacity: 1; }
-  100% { transform: scale(1); }
-}
-
-@keyframes fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
 @keyframes floatUp {
   from { transform: translateY(0); opacity: 1; }
   to { transform: translateY(-110vh); opacity: 0; }
@@ -123,7 +112,7 @@ button {
 
 <body>
 
-<div class="container">
+<div class="container" id="container">
   <h1>Saumya 💖</h1>
   <h2>Will you be my wife? 💍</h2>
   <div class="challenge">I bet you can’t say no 😉</div>
@@ -131,7 +120,6 @@ button {
   <button id="yesBtn">Yes ❤️</button>
   <button id="noBtn">No ❌</button>
 
-  <!-- Bottom Content -->
   <div class="second-content" id="secondContent">
     <div class="love">Rishabh ❤️ Saumya</div>
     <div class="message">
@@ -146,6 +134,7 @@ button {
 </div>
 
 <script>
+const container = document.getElementById("container");
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const secondContent = document.getElementById("secondContent");
@@ -153,22 +142,49 @@ const song = document.getElementById("song");
 
 const MARGIN = 20;
 
+/* Ensure No button moves within container */
 function moveNoButton() {
+  const containerRect = container.getBoundingClientRect();
   const btnRect = noBtn.getBoundingClientRect();
-  const maxX = window.innerWidth - btnRect.width - MARGIN;
-  const maxY = window.innerHeight - btnRect.height - MARGIN;
 
-  noBtn.style.left = Math.random() * maxX + "px";
-  noBtn.style.top = Math.random() * maxY + "px";
+  const maxX = containerRect.width - btnRect.width - MARGIN;
+  const maxY = containerRect.height - btnRect.height - MARGIN;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
 }
 
+noBtn.addEventListener("mouseenter", moveNoButton);
 noBtn.addEventListener("touchstart", (e) => {
   e.preventDefault();
   moveNoButton();
 }, { passive: false });
 
-noBtn.addEventListener("mouseenter", moveNoButton);
-
 yesBtn.addEventListener("click", () => {
   yesBtn.style.display = "none";
   noBtn.style.display = "none";
+  secondContent.style.display = "block";
+  song.play();
+  startHearts();
+});
+
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+  }, 350);
+}
+
+/* Initial placement */
+moveNoButton();
+</script>
+
+</body>
+</html>
