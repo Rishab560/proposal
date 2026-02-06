@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rishabh ❤️ Saumya</title>
+
+  <!-- MUST for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #b30059;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #800040;
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      position: relative;
+      z-index: 5;
+    }
+
+    #yesBtn {
+      background-color: #ff4d88;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #555;
+      color: white;
+      position: absolute;
+    }
+
+    .love {
+      display: none;
+      font-size: 40px;
+      font-weight: bold;
+      color: #ff0066;
+      margin-top: 20px;
+      animation: pop 1.3s ease forwards;
+    }
+
+    .message {
+      display: none;
+      font-size: 18px;
+      color: #800040;
+      margin-top: 12px;
+      line-height: 1.4;
+      animation: fade 2s ease forwards;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 22px;
+      animation: floatUp 4s linear forwards;
+      color: #ff3366;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      70% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container" id="container">
+  <h1>Saumya 💖</h1>
+  <h2>Will you be my wife? 💍</h2>
+
+  <button id="yesBtn">Yes ❤️</button>
+  <button id="noBtn">No ❌</button>
+
+  <div class="love" id="loveText">Rishabh ❤️ Saumya</div>
+
+  <div class="message" id="message">
+    This is the beginning of our forever 🥰✨<br>
+    I promise to respect you, stay honest and loyal, and be with you till the very end 💍
+  </div>
+
+  <audio id="song">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+  </audio>
+</div>
+
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const loveText = document.getElementById("loveText");
+  const message = document.getElementById("message");
+  const song = document.getElementById("song");
+
+  const MARGIN = 20;
+
+  function moveNoButton() {
+    const btnRect = noBtn.getBoundingClientRect();
+    const maxX = window.innerWidth - btnRect.width - MARGIN;
+    const maxY = window.innerHeight - btnRect.height - MARGIN;
+
+    const x = Math.random() * maxX + MARGIN;
+    const y = Math.random() * maxY + MARGIN;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+  }
+
+  // 🔥 MOBILE FIX: move BEFORE click happens
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNoButton();
+  }, { passive: false });
+
+  noBtn.addEventListener("mouseenter", moveNoButton);
+
+  yesBtn.addEventListener("click", () => {
+    yesBtn.style.display = "none";
+    noBtn.style.display = "none";
+
+    loveText.style.display = "block";
+    message.style.display = "block";
+
+    song.play();
+    startHearts();
+  });
+
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }, 350);
+  }
+
+  // Initial safe position
+  moveNoButton();
+</script>
+
+</body>
+</html>
