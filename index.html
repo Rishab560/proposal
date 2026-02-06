@@ -1,144 +1,191 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>For Saumya 💍</title>
+  <meta charset="UTF-8" />
+  <title>Rishabh ❤️ Saumya</title>
 
-<style>
-  * {
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-  }
+  <!-- MUST for mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ffdee9, #b5fffc);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    text-align: center;
-  }
-
-  .container {
-    padding: 20px;
-  }
-
-  h1 {
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-  }
-
-  button {
-    padding: 12px 22px;
-    font-size: 1rem;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  #yes {
-    background: #ff4d6d;
-    color: white;
-    margin-right: 10px;
-  }
-
-  #no {
-    background: #adb5bd;
-    color: black;
-    position: absolute;
-  }
-
-  .message {
-    margin-top: 30px;
-    font-size: 1.1rem;
-    display: none;
-  }
-
-  .heart {
-    position: fixed;
-    bottom: 0;
-    font-size: 20px;
-    animation: floatUp 4s linear forwards;
-  }
-
-  @keyframes floatUp {
-    to {
-      transform: translateY(-110vh);
-      opacity: 0;
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
-  }
-</style>
-</head>
 
+    body {
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+
+    .container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #b30059;
+      margin-bottom: 5px;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #800040;
+      margin-bottom: 25px;
+    }
+
+    button {
+      padding: 12px 28px;
+      font-size: 18px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      position: relative;
+      z-index: 5;
+    }
+
+    #yesBtn {
+      background-color: #ff4d88;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #555;
+      color: white;
+      position: absolute;
+    }
+
+    .love {
+      display: none;
+      font-size: 40px;
+      font-weight: bold;
+      color: #ff0066;
+      margin-top: 20px;
+      animation: pop 1.3s ease forwards;
+    }
+
+    .message {
+      display: none;
+      font-size: 18px;
+      color: #800040;
+      margin-top: 12px;
+      line-height: 1.4;
+      animation: fade 2s ease forwards;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 22px;
+      animation: floatUp 4s linear forwards;
+      color: #ff3366;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0); opacity: 0; }
+      70% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-110vh); opacity: 0; }
+    }
+  </style>
+</head>
 <body>
 
-<div class="container">
-  <h1>Saumya, will you be my wife? 💍</h1>
-  <button id="yes">Yes 💖</button>
-  <button id="no">No 😅</button>
+<div class="container" id="container">
+  <h1>Saumya 💖</h1>
+  <h2>Will you be my wife? 💍</h2>
+
+  <button id="yesBtn">Yes ❤️</button>
+  <button id="noBtn">No ❌</button>
+
+  <div class="love" id="loveText">Rishabh ❤️ Saumya</div>
 
   <div class="message" id="message">
-    <h2>Rishabh ❤️ Saumya</h2>
-    <p>
-      I promise to respect you, stay honest and loyal,  
-      and be with you till the very end 💍
-    </p>
+    This is the beginning of our forever 🥰✨<br>
+    I promise to respect you, stay honest and loyal, and be with you till the very end 💍
   </div>
+
+  <audio id="song">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+  </audio>
 </div>
 
-<audio id="music">
-  <source src="instrumentalK3g320kbps.mp3" type="audio/mpeg">
-</audio>
-
 <script>
-  const noBtn = document.getElementById("no");
-  const yesBtn = document.getElementById("yes");
-  const music = document.getElementById("music");
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const loveText = document.getElementById("loveText");
   const message = document.getElementById("message");
+  const song = document.getElementById("song");
 
-  // initial NO position
-  moveNo();
+  const MARGIN = 20;
 
-  function moveNo() {
-    const margin = 20;
-    const maxX = window.innerWidth - noBtn.offsetWidth - margin;
-    const maxY = window.innerHeight - noBtn.offsetHeight - margin;
+  function moveNoButton() {
+    const btnRect = noBtn.getBoundingClientRect();
+    const maxX = window.innerWidth - btnRect.width - MARGIN;
+    const maxY = window.innerHeight - btnRect.height - MARGIN;
 
-    const x = Math.random() * maxX + margin;
-    const y = Math.random() * maxY + margin;
+    const x = Math.random() * maxX + MARGIN;
+    const y = Math.random() * maxY + MARGIN;
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
   }
 
-  // works for mobile + desktop
-  noBtn.addEventListener("touchstart", moveNo);
-  noBtn.addEventListener("mouseover", moveNo);
-  noBtn.addEventListener("click", moveNo);
+  // 🔥 MOBILE FIX: move BEFORE click happens
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNoButton();
+  }, { passive: false });
+
+  noBtn.addEventListener("mouseenter", moveNoButton);
 
   yesBtn.addEventListener("click", () => {
-    music.play(); // plays ONLY after click → mobile safe
-    message.style.display = "block";
     yesBtn.style.display = "none";
     noBtn.style.display = "none";
-    createHearts();
+
+    loveText.style.display = "block";
+    message.style.display = "block";
+
+    song.play();
+    startHearts();
   });
 
-  function createHearts() {
+  function startHearts() {
     setInterval(() => {
       const heart = document.createElement("div");
       heart.className = "heart";
-      heart.innerText = "❤️";
+      heart.innerHTML = "❤️";
       heart.style.left = Math.random() * 100 + "vw";
-      heart.style.fontSize = (16 + Math.random() * 20) + "px";
       document.body.appendChild(heart);
-
       setTimeout(() => heart.remove(), 4000);
-    }, 300);
+    }, 350);
   }
+
+  // Initial safe position
+  moveNoButton();
 </script>
 
 </body>
