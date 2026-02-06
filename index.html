@@ -1,212 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Rishabh ❤️ Saumya</title>
+<meta charset="UTF-8" />
+<title>Rishabh ❤️ Saumya</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<style>
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+body {
+  height: 100vh;
+  margin: 0;
+  background: url("us.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+}
 
-    body {
-      height: 100vh;
-      margin: 0;
-      background: url("us.jpeg") no-repeat center center fixed;
-      background-size: cover;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-      touch-action: manipulation;
-    }
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px; /* top alignment for first section */
+  backdrop-filter: brightness(0.9);
+}
 
-    .container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      backdrop-filter: brightness(0.9);
-    }
+h1, h2, .challenge {
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
 
-    /* ✅ Move top section slightly higher on mobile */
-    @media (max-width: 768px) {
-      .container {
-        justify-content: flex-start;
-        padding-top: 40px;
-      }
-    }
+h1 { font-size: 32px; margin-bottom: 5px; }
+h2 { font-size: 22px; margin-bottom: 5px; }
 
-    h1 {
-      font-size: 32px;
-      color: #ffffff;
-      margin-bottom: 5px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-    }
+.challenge {
+  font-size: 14px;
+  margin-bottom: 25px;
+  opacity: 0.9;
+}
 
-    h2 {
-      font-size: 22px;
-      color: #ffffff;
-      margin-bottom: 5px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-    }
+button {
+  padding: 12px 28px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin: 10px;
+  z-index: 5;
+}
 
-    .challenge {
-      font-size: 14px;
-      color: #ffffff;
-      margin-bottom: 25px;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-      opacity: 0.9;
-    }
+#yesBtn {
+  background-color: #ff4d88;
+  color: white;
+}
 
-    button {
-      padding: 12px 28px;
-      font-size: 18px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      margin: 10px;
-      position: relative;
-      z-index: 5;
-    }
+#noBtn {
+  background-color: #555;
+  color: white;
+  position: absolute;
+}
 
-    #yesBtn {
-      background-color: #ff4d88;
-      color: white;
-    }
+.second-content {
+  position: absolute;
+  bottom: 40px; /* bottom margin */
+  width: 100%;
+  display: none;
+}
 
-    #noBtn {
-      background-color: #555;
-      color: white;
-      position: absolute;
-    }
-
-    .love {
-      display: none;
-      font-size: 40px;
-      font-weight: bold;
-      color: #ffffff;
-      margin-top: 20px;
-      animation: pop 1.3s ease forwards;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
-    }
-
-    .message {
-      display: none;
-      font-size: 18px;
-      color: #ffffff;
-      margin-top: 12px;
-      line-height: 1.4;
-      animation: fade 2s ease forwards;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.7);
-    }
-
-    .heart {
-      position: fixed;
-      bottom: -20px;
-      font-size: 22px;
-      animation: floatUp 4s linear forwards;
-      color: #ff3366;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    @keyframes pop {
-      0% { transform: scale(0); opacity: 0; }
-      70% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-
-    @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes floatUp {
-      from { transform: translateY(0); opacity: 1; }
-      to { transform: translateY(-110vh); opacity: 0; }
-    }
-  </style>
-</head>
-<body>
-
-<div class="container">
-  <h1>Saumya 💖</h1>
-  <h2>Will you be my wife? 💍</h2>
-  <div class="challenge">I bet you can’t say no 😉</div>
-
-  <button id="yesBtn">Yes ❤️</button>
-  <button id="noBtn">No ❌</button>
-
-  <div class="love" id="loveText">Rishabh ❤️ Saumya</div>
-
-  <div class="message" id="message">
-    This is the beginning of our forever 🥰✨<br>
-    I promise to respect you, stay honest and loyal, and be with you till the very end 💍
-  </div>
-
-  <audio id="song">
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-  </audio>
-</div>
-
-<script>
-  const noBtn = document.getElementById("noBtn");
-  const yesBtn = document.getElementById("yesBtn");
-  const loveText = document.getElementById("loveText");
-  const message = document.getElementById("message");
-  const song = document.getElementById("song");
-
-  const MARGIN = 20;
-
-  function moveNoButton() {
-    const btnRect = noBtn.getBoundingClientRect();
-    const maxX = window.innerWidth - btnRect.width - MARGIN;
-    const maxY = window.innerHeight - btnRect.height - MARGIN;
-
-    const x = Math.random() * maxX + MARGIN;
-    const y = Math.random() * maxY + MARGIN;
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-  }
-
-  noBtn.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    moveNoButton();
-  }, { passive: false });
-
-  noBtn.addEventListener("mouseenter", moveNoButton);
-
-  yesBtn.addEventListener("click", () => {
-    yesBtn.style.display = "none";
-    noBtn.style.display = "none";
-
-    loveText.style.display = "block";
-    message.style.display = "block";
-
-    song.play();
-    startHearts();
-  });
-
-  function startHearts() {
-    setInterval(() => {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerHTML = "❤️";
-      heart.style.left = Math.random() * 100 + "vw";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
-    }, 350);
-  }
-
-  moveNoButton();
-</script>
-
-</body>
-</html>
+.love {
+  font-size: 36px;
+  font-weight: bold;
+  co
