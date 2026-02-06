@@ -17,7 +17,6 @@ body {
   background: url("us.jpeg") no-repeat center center fixed;
   background-size: cover;
   font-family: 'Segoe UI', sans-serif;
-  overflow: hidden;
 }
 
 .container {
@@ -29,10 +28,11 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: 40px; /* top alignment for first section */
+  padding-top: 40px;
   backdrop-filter: brightness(0.9);
 }
 
+/* Top content */
 h1, h2, .challenge {
   color: #fff;
   text-shadow: 0 2px 8px rgba(0,0,0,0.6);
@@ -68,14 +68,107 @@ button {
   position: absolute;
 }
 
+/* Bottom second screen content */
 .second-content {
   position: absolute;
-  bottom: 40px; /* bottom margin */
-  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 40px;
   display: none;
 }
 
 .love {
   font-size: 36px;
   font-weight: bold;
-  co
+  color: #fff;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  animation: pop 1.3s ease forwards;
+}
+
+.message {
+  font-size: 16px;
+  color: #fff;
+  line-height: 1.4;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+  animation: fade 2s ease forwards;
+}
+
+.heart {
+  position: fixed;
+  bottom: -20px;
+  font-size: 22px;
+  animation: floatUp 4s linear forwards;
+  color: #ff3366;
+  pointer-events: none;
+}
+
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-110vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Saumya 💖</h1>
+  <h2>Will you be my wife? 💍</h2>
+  <div class="challenge">I bet you can’t say no 😉</div>
+
+  <button id="yesBtn">Yes ❤️</button>
+  <button id="noBtn">No ❌</button>
+
+  <!-- Bottom Content -->
+  <div class="second-content" id="secondContent">
+    <div class="love">Rishabh ❤️ Saumya</div>
+    <div class="message">
+      This is the beginning of our forever 🥰✨<br>
+      I promise to respect you, stay honest and loyal, and be with you till the very end 💍
+    </div>
+  </div>
+
+  <audio id="song">
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+  </audio>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const secondContent = document.getElementById("secondContent");
+const song = document.getElementById("song");
+
+const MARGIN = 20;
+
+function moveNoButton() {
+  const btnRect = noBtn.getBoundingClientRect();
+  const maxX = window.innerWidth - btnRect.width - MARGIN;
+  const maxY = window.innerHeight - btnRect.height - MARGIN;
+
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top = Math.random() * maxY + "px";
+}
+
+noBtn.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  moveNoButton();
+}, { passive: false });
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+
+yesBtn.addEventListener("click", () => {
+  yesBtn.style.display = "none";
+  noBtn.style.display = "none";
